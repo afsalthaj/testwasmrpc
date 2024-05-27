@@ -14,3 +14,13 @@ This works just as fine
 ../golem/target/debug/golem-cli stubgen initialize-workspace --targets callee --callers caller --wasm-rpc-path-override /Users/afsalthaj/github/wasm-rpc/wasm-rpc
 
 ```
+
+### Cyclic dependency
+
+```cookie
+
+../golem/target/debug/golem-cli stubgen initialize-workspace --targets caller --callers caller --wasm-rpc-path-override /Users/afsalthaj/github/wasm-rpc/wasm-rpc
+
+```
+
+The branch of wasm-rpc in use is `fix-cyclic-dep`
