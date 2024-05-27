@@ -1,0 +1,37 @@
+[package]
+name = "callee-stub"
+edition = "2021"
+version = "0.0.1"
+
+[package.metadata.component]
+package = "test:callee"
+
+[package.metadata.component.target]
+world = "wasm-rpc-stub-callee"
+path = "wit"
+
+[package.metadata.component.target.dependencies."golem:rpc"]
+path = "wit/deps/wasm-rpc"
+
+[package.metadata.component.target.dependencies."test:callee"]
+path = "wit/deps/test_callee"
+
+[dependencies.golem-wasm-rpc]
+path = "/Users/afsalthaj/github/wasm-rpc/wasm-rpc"
+features = ["stub"]
+default-features = false
+
+[dependencies.wit-bindgen]
+version = "0.17.0"
+features = ["realloc"]
+default-features = false
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+required-features = []
+
+[profile.release]
+opt-level = "s"
+lto = true
+strip = true
