@@ -1,0 +1,11 @@
+package test:caller;
+
+
+interface api {
+  run-self: func(name: string) -> string;
+  run-remote: func(remote: string) -> string;
+}
+
+world caller {
+  export api;
+}
