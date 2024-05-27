@@ -1,5 +1,5 @@
 [workspace]
-members = ["caller"]
+members = ["caller", "callee", "caller-stub"]
 resolver = "2"
 
 [profile.release]

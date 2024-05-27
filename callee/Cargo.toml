@@ -1,0 +1,13 @@
+[package]
+name = "callee"
+edition = "2021"
+version = "0.0.1"
+
+[package.metadata.component.target]
+world = "callee"
+path = "wit"
+
+[dependencies.wit-bindgen]
+version = "0.17.0"
+features = ["realloc"]
+default-features = false
