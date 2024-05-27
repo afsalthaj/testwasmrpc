@@ -1,0 +1,10 @@
+package test:callee;
+
+
+interface api {
+  run-callee: func(input: string) -> string;
+}
+
+world callee {
+  export api;
+}
