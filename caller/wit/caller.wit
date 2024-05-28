@@ -7,11 +7,9 @@ interface api {
     value: string
   }
 
-  run-self: func(name: string) -> new-type;
-  run-remote: func(remote: new-type) -> string;
+  run: func(name: string) -> new-type;
 }
 
 world caller {
-  import test:callee-stub/stub-callee;
   export api;
 }
