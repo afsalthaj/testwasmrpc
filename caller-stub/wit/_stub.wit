@@ -1,0 +1,16 @@
+package test:caller-stub;
+
+interface stub-caller {
+  use golem:rpc/types@0.1.0.{uri};
+  use test:caller/api.{new-type};
+
+  resource api {
+    constructor(location: uri);
+    run: func(name: string) -> new-type;
+  }
+
+}
+
+world wasm-rpc-stub-caller {
+  export stub-caller;
+}
