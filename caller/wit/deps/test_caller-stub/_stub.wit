@@ -16,6 +16,7 @@ interface stub-caller {
   type no-result =  result;
   resource api {
     constructor(location: uri);
+    add: func(x: s32, y: s32) -> s64;
     run: func(name: string) -> new-type;
   }
 
