@@ -11,6 +11,10 @@ interface api {
     value: string
   }
 
+  type new-type-alias = option<string>;
+
+  type another-type-alias = result<new-type-alias, string>;
+
   run: func(name: string) -> new-type;
 }
 

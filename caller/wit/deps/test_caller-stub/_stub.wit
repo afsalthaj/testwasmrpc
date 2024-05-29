@@ -9,6 +9,8 @@ interface stub-caller {
   record another-type {
     value: string
   }
+  type new-type-alias =  option<string>;
+  type another-type-alias =  result<option<string>, string>;
   resource api {
     constructor(location: uri);
     run: func(name: string) -> new-type;
