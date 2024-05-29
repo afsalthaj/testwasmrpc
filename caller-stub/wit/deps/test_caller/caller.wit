@@ -15,6 +15,12 @@ interface api {
 
   type another-type-alias = result<new-type-alias, string>;
 
+  type failing = result<_, string>;
+
+  type not-failing = result<string>;
+
+  type no-result = result;
+
   run: func(name: string) -> new-type;
 }
 

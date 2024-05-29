@@ -6,6 +6,9 @@ interface stub-caller {
   use test:caller/api.{another-type};
   use test:caller/api.{new-type-alias};
   use test:caller/api.{another-type-alias};
+  use test:caller/api.{failing};
+  use test:caller/api.{not-failing};
+  use test:caller/api.{no-result};
 
   resource api {
     constructor(location: uri);

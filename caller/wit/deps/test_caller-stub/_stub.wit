@@ -11,6 +11,9 @@ interface stub-caller {
   }
   type new-type-alias =  option<string>;
   type another-type-alias =  result<option<string>, string>;
+  type failing =  result<_, string>;
+  type not-failing =  result<string>;
+  type no-result =  result;
   resource api {
     constructor(location: uri);
     run: func(name: string) -> new-type;
