@@ -1,4 +1,4 @@
-use crate::bindings::exports::test::caller::api::{CalleeType, Guest};
+use crate::bindings::exports::test::callee::api::{CalleeType, Guest};
 
 mod bindings;
 

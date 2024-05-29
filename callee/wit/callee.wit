@@ -1,4 +1,4 @@
-package test:caller;
+package test:callee;
 
 interface api {
   record callee-type {
