@@ -6,6 +6,9 @@ interface stub-caller {
   record new-type {
     value: string
   }
+  record another-type {
+    value: string
+  }
   resource api {
     constructor(location: uri);
     run: func(name: string) -> new-type;

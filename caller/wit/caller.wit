@@ -7,6 +7,10 @@ interface api {
     value: string
   }
 
+  record another-type {
+    value: string
+  }
+
   run: func(name: string) -> new-type;
 }
 
