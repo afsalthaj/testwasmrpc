@@ -7,6 +7,9 @@ mod bindings;
 struct Component;
 
 impl Guest for Component {
+    fn add(x: i32, y: i32) -> i64 {
+        (x + y) as i64
+    }
 
     fn run(component_id: String) -> NewType {
         let uri = Uri { value: format!("worker://{component_id}/{}", "myworker") };

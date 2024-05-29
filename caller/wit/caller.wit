@@ -1,11 +1,16 @@
 package test:caller;
 
-
 interface api {
-
   record new-type {
     value: string
   }
+
+   enum a-or-b {
+     a,
+     b,
+   }
+
+  type alias = a-or-b;
 
   record another-type {
     value: string
