@@ -11,5 +11,6 @@ interface api {
 }
 
 world caller {
+  import test:caller-stub/stub-caller;
   export api;
 }

@@ -16,9 +16,6 @@ path = "wit/deps/wasm-rpc"
 [package.metadata.component.target.dependencies."test:caller"]
 path = "wit/deps/test_caller"
 
-[package.metadata.component.target.dependencies."test:caller-stub"]
-path = "wit/deps/test_caller-stub"
-
 [dependencies.golem-wasm-rpc]
 path = "/Users/afsalthaj/github/wasm-rpc/wasm-rpc"
 features = ["stub"]
