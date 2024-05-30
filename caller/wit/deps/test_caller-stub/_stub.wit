@@ -1,0 +1,33 @@
+package test:caller-stub;
+
+interface stub-caller {
+  use golem:rpc/types@0.1.0.{uri};
+
+  record new-type {
+    value: string
+  }
+  enum a-or-b {
+    a,
+
+    b
+  }
+  type alias = a-or-b;
+  record another-type {
+    value: string
+  }
+  type new-type-alias =  option<string>;
+  type another-type-alias =  result<option<string>, string>;
+  type failing =  result<_, string>;
+  type not-failing =  result<string>;
+  type no-result =  result;
+  resource api {
+    constructor(location: uri);
+    add: func(x: s32, y: s32) -> s64;
+    run: func(name: string) -> new-type;
+  }
+
+}
+
+world wasm-rpc-stub-caller {
+  export stub-caller;
+}
