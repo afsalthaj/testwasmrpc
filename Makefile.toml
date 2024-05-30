@@ -60,7 +60,7 @@ dependencies = ["compose-caller"]
 dependencies = ["compose-release-caller"]
 
 [tasks.regenerate-stubs]
-dependencies = ["add-stub-dependency-caller-caller"]
+dependencies = ["add-stub-dependency-callee-caller", "add-stub-dependency-caller-caller", ]
 
 [tasks.release-build-flow]
 dependencies = ["build-release", "post-build-release"]
