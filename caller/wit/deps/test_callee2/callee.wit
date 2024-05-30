@@ -1,0 +1,13 @@
+package test:callee2;
+
+interface api {
+  record callee2-type {
+    value: string
+  }
+
+  run: func(name: string) -> callee2-type;
+}
+
+world callee2 {
+  export api;
+}

@@ -1,0 +1,16 @@
+package test:callee2-stub;
+
+interface stub-callee2 {
+  use golem:rpc/types@0.1.0.{uri};
+  use test:callee2/api.{callee2-type};
+
+  resource api {
+    constructor(location: uri);
+    run: func(name: string) -> callee2-type;
+  }
+
+}
+
+world wasm-rpc-stub-callee2 {
+  export stub-callee2;
+}

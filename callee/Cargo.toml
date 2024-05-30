@@ -7,6 +7,14 @@ version = "0.0.1"
 world = "callee"
 path = "wit"
 
+[package.metadata.component.target.dependencies."golem:rpc"]
+path = "wit/deps/wasm-rpc"
+
+[package.metadata.component.target.dependencies."test:callee2"]
+path = "wit/deps/test_callee2"
+
+[package.metadata.component.target.dependencies."test:callee2-stub"]
+path = "wit/deps/test_callee2-stub"
 
 [dependencies.wit-bindgen]
 version = "0.17.0"
