@@ -45,6 +45,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "callee2"
+version = "0.0.1"
+dependencies = [
+ "wit-bindgen",
+]
+
+[[package]]
 name = "caller"
 version = "0.0.1"
 dependencies = [

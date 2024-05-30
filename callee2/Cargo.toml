@@ -1,0 +1,19 @@
+[package]
+name = "callee2"
+edition = "2021"
+version = "0.0.1"
+
+[package.metadata.component.target]
+world = "callee2"
+path = "wit"
+
+
+[dependencies.wit-bindgen]
+version = "0.17.0"
+features = ["realloc"]
+default-features = false
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+required-features = []
