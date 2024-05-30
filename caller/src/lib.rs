@@ -1,6 +1,5 @@
 use crate::bindings::exports::test::caller::api::{Guest, NewType};
-// use crate::bindings::golem::rpc::types::Uri;
-// use crate::bindings::test::caller_stub::stub_caller::Api;
+use crate::bindings::test::callee_stub::stub_callee::{Api, Uri};
 
 mod bindings;
 
@@ -12,15 +11,15 @@ impl Guest for Component {
     }
 
     fn run(component_id: String) -> NewType {
-        // let uri = Uri { value: format!("worker://{component_id}/{}", "myworker") };
-        //
-        // let api = Api::new(&uri);
-        //
-        // // Cyclic call
-        // let result = api.run("foo");
+        let uri = Uri { value: format!("worker://{component_id}/{}", "myworker") };
+
+        let api = Api::new(&uri);
+
+        // Cyclic call
+        let result = api.run("foo");
 
         NewType {
-            value: "afsal".to_string()
+            value: result.value
         }
     }
 }
