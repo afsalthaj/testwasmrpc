@@ -23,7 +23,7 @@ path = "wit/deps/test_callee-stub"
 path = "wit/deps/test_caller"
 
 [dependencies.golem-wasm-rpc]
-path = "/Users/afsalthaj/github/wasm-rpc/wasm-rpc"
+path = "/Users/sameer/workspace/wasm-rpc/wasm-rpc"
 features = ["stub"]
 default-features = false
 

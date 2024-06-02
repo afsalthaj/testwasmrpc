@@ -9,5 +9,6 @@ interface api {
 }
 
 world callee {
+//   import test:caller-stub/stub-caller;
   export api;
 }
