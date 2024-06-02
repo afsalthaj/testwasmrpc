@@ -7,6 +7,20 @@ version = "0.0.1"
 world = "callee"
 path = "wit"
 
+[package.metadata.component.target.dependencies."golem:rpc"]
+path = "wit/deps/wasm-rpc"
+
+[package.metadata.component.target.dependencies."test:callee"]
+path = "wit/deps/test_callee"
+
+[package.metadata.component.target.dependencies."test:callee-stub"]
+path = "wit/deps/test_callee-stub"
+
+[package.metadata.component.target.dependencies."test:caller"]
+path = "wit/deps/test_caller"
+
+[package.metadata.component.target.dependencies."test:caller-stub"]
+path = "wit/deps/test_caller-stub"
 
 [dependencies.wit-bindgen]
 version = "0.17.0"
