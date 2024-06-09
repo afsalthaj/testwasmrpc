@@ -7,6 +7,12 @@ command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
 cwd = "."
 dependencies = ["generate-callee-stub"]
 
+[tasks.add-stub-dependency-caller-callee]
+args = ["stubgen", "add-stub-dependency", "--stub-wit-root", "caller-stub/wit", "--dest-wit-root", "callee/wit", "--overwrite", "--update-cargo-toml"]
+command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
+cwd = "."
+dependencies = ["generate-caller-stub"]
+
 [tasks.build]
 args = ["build"]
 command = "cargo-component"
@@ -24,8 +30,18 @@ dependencies = ["clean", "regenerate-stubs"]
 args = ["clean"]
 command = "cargo-component"
 
+[tasks.compose-callee]
+args = ["stubgen", "compose", "--source-wasm", "target/wasm32-wasi/debug/callee.wasm", "--stub-wasm", "target/wasm32-wasi/debug/caller_stub.wasm", "--dest-wasm", "target/wasm32-wasi/debug/callee_composed.wasm"]
+command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
+cwd = "."
+
 [tasks.compose-caller]
 args = ["stubgen", "compose", "--source-wasm", "target/wasm32-wasi/debug/caller.wasm", "--stub-wasm", "target/wasm32-wasi/debug/callee_stub.wasm", "--dest-wasm", "target/wasm32-wasi/debug/caller_composed.wasm"]
+command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
+cwd = "."
+
+[tasks.compose-release-callee]
+args = ["stubgen", "compose", "--source-wasm", "target/wasm32-wasi/release/callee.wasm", "--stub-wasm", "target/wasm32-wasi/release/caller_stub.wasm", "--dest-wasm", "target/wasm32-wasi/release/callee_composed.wasm"]
 command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
 cwd = "."
 
@@ -42,14 +58,19 @@ args = ["stubgen", "generate", "-s", "callee/wit", "-d", "callee-stub", "--wasm-
 command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
 cwd = "."
 
+[tasks.generate-caller-stub]
+args = ["stubgen", "generate", "-s", "caller/wit", "-d", "caller-stub", "--wasm-rpc-path-override", "/Users/afsalthaj/github/wasm-rpc/wasm-rpc"]
+command = "/Users/afsalthaj/github/golem/target/debug/golem-cli"
+cwd = "."
+
 [tasks.post-build]
-dependencies = ["compose-caller"]
+dependencies = ["compose-callee"]
 
 [tasks.post-build-release]
-dependencies = ["compose-release-caller"]
+dependencies = ["compose-release-callee"]
 
 [tasks.regenerate-stubs]
-dependencies = ["add-stub-dependency-callee-caller"]
+dependencies = ["add-stub-dependency-callee-caller", "add-stub-dependency-caller-callee"]
 
 [tasks.release-build-flow]
 dependencies = ["build-release", "post-build-release"]

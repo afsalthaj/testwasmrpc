@@ -1,0 +1,37 @@
+package test:caller;
+
+interface api {
+  record new-type {
+    value: string
+  }
+
+   enum a-or-b {
+     a,
+     b,
+   }
+
+  type alias = a-or-b;
+
+  record another-type {
+    value: string
+  }
+
+  type new-type-alias = option<string>;
+
+  type another-type-alias = result<new-type-alias, string>;
+
+  type failing = result<_, string>;
+
+  type not-failing = result<string>;
+
+  type no-result = result;
+
+  add: func(x: s32, y: s32) -> s64;
+
+  run: func(name: string) -> new-type;
+}
+
+world caller {
+  import test:callee-stub/stub-callee;
+  export api;
+}

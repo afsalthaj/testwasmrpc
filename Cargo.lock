@@ -59,6 +59,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "caller-stub"
+version = "0.0.1"
+dependencies = [
+ "golem-wasm-rpc",
+ "wit-bindgen",
+]
+
+[[package]]
 name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
