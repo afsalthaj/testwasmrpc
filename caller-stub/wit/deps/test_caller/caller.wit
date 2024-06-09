@@ -32,6 +32,7 @@ interface api {
 }
 
 world caller {
+  
   import test:callee-stub/stub-callee;
   export api;
 }

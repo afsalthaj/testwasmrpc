@@ -16,6 +16,9 @@ path = "wit/deps/test_callee"
 [package.metadata.component.target.dependencies."test:callee-stub"]
 path = "wit/deps/test_callee-stub"
 
+[package.metadata.component.target.dependencies."test:caller-stub"]
+path = "wit/deps/test_caller-stub"
+
 [dependencies.wit-bindgen]
 version = "0.17.0"
 features = ["realloc"]
