@@ -1179,7 +1179,7 @@ pub mod golem {
                       }
                     }
                     pub mod test {
-                      pub mod callee {
+                      pub mod caller {
                         
                         #[allow(clippy::all)]
                         pub mod api {
@@ -1187,182 +1187,6 @@ pub mod golem {
                           #[doc(hidden)]
                           #[cfg(target_arch = "wasm32")]
                           static __FORCE_SECTION_REF: fn() = super::super::super::__link_section;
-                          #[derive(Clone)]
-                          pub struct CalleeType {
-                            pub value: wit_bindgen::rt::string::String,
-                          }
-                          impl ::core::fmt::Debug for CalleeType {
-                            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-                              f.debug_struct("CalleeType").field("value", &self.value).finish()
-                            }
-                          }
-                          #[allow(unused_unsafe, clippy::all)]
-                          pub fn run(name: &str,) -> CalleeType{
-                            
-                            #[allow(unused_imports)]
-                            use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                            unsafe {
-                              
-                              #[repr(align(4))]
-                              struct RetArea([u8; 8]);
-                              let mut ret_area = ::core::mem::MaybeUninit::<RetArea>::uninit();
-                              let vec0 = name;
-                              let ptr0 = vec0.as_ptr() as i32;
-                              let len0 = vec0.len() as i32;
-                              let ptr1 = ret_area.as_mut_ptr() as i32;
-                              #[cfg(target_arch = "wasm32")]
-                              #[link(wasm_import_module = "test:callee/api")]
-                              extern "C" {
-                                #[link_name = "run"]
-                                fn wit_import(_: i32, _: i32, _: i32, );
-                              }
-                              
-                              #[cfg(not(target_arch = "wasm32"))]
-                              fn wit_import(_: i32, _: i32, _: i32, ){ unreachable!() }
-                              wit_import(ptr0, len0, ptr1);
-                              let l2 = *((ptr1 + 0) as *const i32);
-                              let l3 = *((ptr1 + 4) as *const i32);
-                              let len4 = l3 as usize;
-                              let bytes4 = Vec::from_raw_parts(l2 as *mut _, len4, len4);
-                              CalleeType{
-                                value: wit_bindgen::rt::string_lift(bytes4),
-                              }
-                            }
-                          }
-                          
-                        }
-                        
-                      }
-                      pub mod callee_stub {
-                        
-                        #[allow(clippy::all)]
-                        pub mod stub_callee {
-                          #[used]
-                          #[doc(hidden)]
-                          #[cfg(target_arch = "wasm32")]
-                          static __FORCE_SECTION_REF: fn() = super::super::super::__link_section;
-                          pub type Uri = super::super::super::golem::rpc::types::Uri;
-                          pub type CalleeType = super::super::super::test::callee::api::CalleeType;
-                          
-                          #[derive(Debug)]
-                          #[repr(transparent)]
-                          pub struct Api{
-                            handle: wit_bindgen::rt::Resource<Api>,
-                          }
-                          
-                          impl Api{
-                            #[doc(hidden)]
-                            pub unsafe fn from_handle(handle: u32) -> Self {
-                              Self {
-                                handle: wit_bindgen::rt::Resource::from_handle(handle),
-                              }
-                            }
-                            
-                            #[doc(hidden)]
-                            pub fn into_handle(self) -> u32 {
-                              wit_bindgen::rt::Resource::into_handle(self.handle)
-                            }
-                            
-                            #[doc(hidden)]
-                            pub fn handle(&self) -> u32 {
-                              wit_bindgen::rt::Resource::handle(&self.handle)
-                            }
-                          }
-                          
-                          
-                          unsafe impl wit_bindgen::rt::WasmResource for Api{
-                            #[inline]
-                            unsafe fn drop(_handle: u32) {
-                              #[cfg(not(target_arch = "wasm32"))]
-                              unreachable!();
-                              
-                              #[cfg(target_arch = "wasm32")]
-                              {
-                                #[link(wasm_import_module = "test:callee-stub/stub-callee")]
-                                extern "C" {
-                                  #[link_name = "[resource-drop]api"]
-                                  fn drop(_: u32);
-                                }
-                                
-                                drop(_handle);
-                              }
-                            }
-                          }
-                          
-                          impl Api {
-                            #[allow(unused_unsafe, clippy::all)]
-                            pub fn new(location: &Uri,) -> Self{
-                              
-                              #[allow(unused_imports)]
-                              use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                              unsafe {
-                                let super::super::super::golem::rpc::types::Uri{ value:value0, } = location;
-                                let vec1 = value0;
-                                let ptr1 = vec1.as_ptr() as i32;
-                                let len1 = vec1.len() as i32;
-                                
-                                #[cfg(target_arch = "wasm32")]
-                                #[link(wasm_import_module = "test:callee-stub/stub-callee")]
-                                extern "C" {
-                                  #[link_name = "[constructor]api"]
-                                  fn wit_import(_: i32, _: i32, ) -> i32;
-                                }
-                                
-                                #[cfg(not(target_arch = "wasm32"))]
-                                fn wit_import(_: i32, _: i32, ) -> i32{ unreachable!() }
-                                let ret = wit_import(ptr1, len1);
-                                Api::from_handle(ret as u32)
-                              }
-                            }
-                          }
-                          impl Api {
-                            #[allow(unused_unsafe, clippy::all)]
-                            pub fn run(&self,name: &str,) -> CalleeType{
-                              
-                              #[allow(unused_imports)]
-                              use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                              unsafe {
-                                
-                                #[repr(align(4))]
-                                struct RetArea([u8; 8]);
-                                let mut ret_area = ::core::mem::MaybeUninit::<RetArea>::uninit();
-                                let vec0 = name;
-                                let ptr0 = vec0.as_ptr() as i32;
-                                let len0 = vec0.len() as i32;
-                                let ptr1 = ret_area.as_mut_ptr() as i32;
-                                #[cfg(target_arch = "wasm32")]
-                                #[link(wasm_import_module = "test:callee-stub/stub-callee")]
-                                extern "C" {
-                                  #[link_name = "[method]api.run"]
-                                  fn wit_import(_: i32, _: i32, _: i32, _: i32, );
-                                }
-                                
-                                #[cfg(not(target_arch = "wasm32"))]
-                                fn wit_import(_: i32, _: i32, _: i32, _: i32, ){ unreachable!() }
-                                wit_import((self).handle() as i32, ptr0, len0, ptr1);
-                                let l2 = *((ptr1 + 0) as *const i32);
-                                let l3 = *((ptr1 + 4) as *const i32);
-                                let len4 = l3 as usize;
-                                let bytes4 = Vec::from_raw_parts(l2 as *mut _, len4, len4);
-                                super::super::super::test::callee::api::CalleeType{
-                                  value: wit_bindgen::rt::string_lift(bytes4),
-                                }
-                              }
-                            }
-                          }
-                          
-                        }
-                        
-                      }
-                      pub mod caller_stub {
-                        
-                        #[allow(clippy::all)]
-                        pub mod stub_caller {
-                          #[used]
-                          #[doc(hidden)]
-                          #[cfg(target_arch = "wasm32")]
-                          static __FORCE_SECTION_REF: fn() = super::super::super::__link_section;
-                          pub type Uri = super::super::super::golem::rpc::types::Uri;
                           #[derive(Clone)]
                           pub struct NewType {
                             pub value: wit_bindgen::rt::string::String,
@@ -1406,132 +1230,56 @@ pub mod golem {
                             }
                           }
                           
-                          
-                          #[derive(Debug)]
-                          #[repr(transparent)]
-                          pub struct Api{
-                            handle: wit_bindgen::rt::Resource<Api>,
-                          }
-                          
-                          impl Api{
-                            #[doc(hidden)]
-                            pub unsafe fn from_handle(handle: u32) -> Self {
-                              Self {
-                                handle: wit_bindgen::rt::Resource::from_handle(handle),
-                              }
-                            }
+                          #[allow(unused_unsafe, clippy::all)]
+                          pub fn add(x: i32,y: i32,) -> i64{
                             
-                            #[doc(hidden)]
-                            pub fn into_handle(self) -> u32 {
-                              wit_bindgen::rt::Resource::into_handle(self.handle)
-                            }
-                            
-                            #[doc(hidden)]
-                            pub fn handle(&self) -> u32 {
-                              wit_bindgen::rt::Resource::handle(&self.handle)
-                            }
-                          }
-                          
-                          
-                          unsafe impl wit_bindgen::rt::WasmResource for Api{
-                            #[inline]
-                            unsafe fn drop(_handle: u32) {
-                              #[cfg(not(target_arch = "wasm32"))]
-                              unreachable!();
+                            #[allow(unused_imports)]
+                            use wit_bindgen::rt::{alloc, vec::Vec, string::String};
+                            unsafe {
                               
                               #[cfg(target_arch = "wasm32")]
-                              {
-                                #[link(wasm_import_module = "test:caller-stub/stub-caller")]
-                                extern "C" {
-                                  #[link_name = "[resource-drop]api"]
-                                  fn drop(_: u32);
-                                }
-                                
-                                drop(_handle);
+                              #[link(wasm_import_module = "test:caller/api")]
+                              extern "C" {
+                                #[link_name = "add"]
+                                fn wit_import(_: i32, _: i32, ) -> i64;
                               }
+                              
+                              #[cfg(not(target_arch = "wasm32"))]
+                              fn wit_import(_: i32, _: i32, ) -> i64{ unreachable!() }
+                              let ret = wit_import(wit_bindgen::rt::as_i32(x), wit_bindgen::rt::as_i32(y));
+                              ret
                             }
                           }
-                          
-                          impl Api {
-                            #[allow(unused_unsafe, clippy::all)]
-                            pub fn new(location: &Uri,) -> Self{
+                          #[allow(unused_unsafe, clippy::all)]
+                          pub fn run(name: &str,) -> NewType{
+                            
+                            #[allow(unused_imports)]
+                            use wit_bindgen::rt::{alloc, vec::Vec, string::String};
+                            unsafe {
                               
-                              #[allow(unused_imports)]
-                              use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                              unsafe {
-                                let super::super::super::golem::rpc::types::Uri{ value:value0, } = location;
-                                let vec1 = value0;
-                                let ptr1 = vec1.as_ptr() as i32;
-                                let len1 = vec1.len() as i32;
-                                
-                                #[cfg(target_arch = "wasm32")]
-                                #[link(wasm_import_module = "test:caller-stub/stub-caller")]
-                                extern "C" {
-                                  #[link_name = "[constructor]api"]
-                                  fn wit_import(_: i32, _: i32, ) -> i32;
-                                }
-                                
-                                #[cfg(not(target_arch = "wasm32"))]
-                                fn wit_import(_: i32, _: i32, ) -> i32{ unreachable!() }
-                                let ret = wit_import(ptr1, len1);
-                                Api::from_handle(ret as u32)
+                              #[repr(align(4))]
+                              struct RetArea([u8; 8]);
+                              let mut ret_area = ::core::mem::MaybeUninit::<RetArea>::uninit();
+                              let vec0 = name;
+                              let ptr0 = vec0.as_ptr() as i32;
+                              let len0 = vec0.len() as i32;
+                              let ptr1 = ret_area.as_mut_ptr() as i32;
+                              #[cfg(target_arch = "wasm32")]
+                              #[link(wasm_import_module = "test:caller/api")]
+                              extern "C" {
+                                #[link_name = "run"]
+                                fn wit_import(_: i32, _: i32, _: i32, );
                               }
-                            }
-                          }
-                          impl Api {
-                            #[allow(unused_unsafe, clippy::all)]
-                            pub fn add(&self,x: i32,y: i32,) -> i64{
                               
-                              #[allow(unused_imports)]
-                              use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                              unsafe {
-                                
-                                #[cfg(target_arch = "wasm32")]
-                                #[link(wasm_import_module = "test:caller-stub/stub-caller")]
-                                extern "C" {
-                                  #[link_name = "[method]api.add"]
-                                  fn wit_import(_: i32, _: i32, _: i32, ) -> i64;
-                                }
-                                
-                                #[cfg(not(target_arch = "wasm32"))]
-                                fn wit_import(_: i32, _: i32, _: i32, ) -> i64{ unreachable!() }
-                                let ret = wit_import((self).handle() as i32, wit_bindgen::rt::as_i32(x), wit_bindgen::rt::as_i32(y));
-                                ret
-                              }
-                            }
-                          }
-                          impl Api {
-                            #[allow(unused_unsafe, clippy::all)]
-                            pub fn run(&self,name: &str,) -> NewType{
-                              
-                              #[allow(unused_imports)]
-                              use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                              unsafe {
-                                
-                                #[repr(align(4))]
-                                struct RetArea([u8; 8]);
-                                let mut ret_area = ::core::mem::MaybeUninit::<RetArea>::uninit();
-                                let vec0 = name;
-                                let ptr0 = vec0.as_ptr() as i32;
-                                let len0 = vec0.len() as i32;
-                                let ptr1 = ret_area.as_mut_ptr() as i32;
-                                #[cfg(target_arch = "wasm32")]
-                                #[link(wasm_import_module = "test:caller-stub/stub-caller")]
-                                extern "C" {
-                                  #[link_name = "[method]api.run"]
-                                  fn wit_import(_: i32, _: i32, _: i32, _: i32, );
-                                }
-                                
-                                #[cfg(not(target_arch = "wasm32"))]
-                                fn wit_import(_: i32, _: i32, _: i32, _: i32, ){ unreachable!() }
-                                wit_import((self).handle() as i32, ptr0, len0, ptr1);
-                                let l2 = *((ptr1 + 0) as *const i32);
-                                let l3 = *((ptr1 + 4) as *const i32);
-                                let len4 = l3 as usize;
-                                let bytes4 = Vec::from_raw_parts(l2 as *mut _, len4, len4);
-                                NewType{
-                                  value: wit_bindgen::rt::string_lift(bytes4),
-                                }
+                              #[cfg(not(target_arch = "wasm32"))]
+                              fn wit_import(_: i32, _: i32, _: i32, ){ unreachable!() }
+                              wit_import(ptr0, len0, ptr1);
+                              let l2 = *((ptr1 + 0) as *const i32);
+                              let l3 = *((ptr1 + 4) as *const i32);
+                              let len4 = l3 as usize;
+                              let bytes4 = Vec::from_raw_parts(l2 as *mut _, len4, len4);
+                              NewType{
+                                value: wit_bindgen::rt::string_lift(bytes4),
                               }
                             }
                           }
@@ -1542,90 +1290,85 @@ pub mod golem {
                     }
                     pub mod exports {
                       pub mod test {
-                        pub mod caller {
+                        pub mod caller_stub {
                           
                           #[allow(clippy::all)]
-                          pub mod api {
+                          pub mod stub_caller {
                             #[used]
                             #[doc(hidden)]
                             #[cfg(target_arch = "wasm32")]
                             static __FORCE_SECTION_REF: fn() = super::super::super::super::__link_section;
-                            #[derive(Clone)]
-                            pub struct NewType {
-                              pub value: wit_bindgen::rt::string::String,
-                            }
-                            impl ::core::fmt::Debug for NewType {
-                              fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-                                f.debug_struct("NewType").field("value", &self.value).finish()
-                              }
-                            }
-                            #[repr(u8)]
-                            #[derive(Clone, Copy, Eq, PartialEq)]
-                            pub enum AOrB {
-                              A,
-                              B,
-                            }
-                            impl ::core::fmt::Debug for AOrB {
-                              fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-                                match self {
-                                  AOrB::A => {
-                                    f.debug_tuple("AOrB::A").finish()
-                                  }
-                                  AOrB::B => {
-                                    f.debug_tuple("AOrB::B").finish()
-                                  }
-                                }
-                              }
-                            }
+                            pub type Uri = super::super::super::super::golem::rpc::types::Uri;
+                            pub type NewType = super::super::super::super::test::caller::api::NewType;
                             
-                            impl AOrB{
-                              pub(crate) unsafe fn _lift(val: u8) -> AOrB{
-                                if !cfg!(debug_assertions) {
-                                  return ::core::mem::transmute(val);
-                                }
-                                
-                                match val {
-                                  0 => AOrB::A,
-                                  1 => AOrB::B,
-                                  
-                                  _ => panic!("invalid enum discriminant"),
-                                }
-                              }
-                            }
-                            
+                            pub use super::super::super::super::super::Api as Api;
                             const _: () = {
-                              
                               #[doc(hidden)]
-                              #[export_name = "test:caller/api#add"]
+                              #[export_name = "test:caller-stub/stub-caller#[dtor]api"]
                               #[allow(non_snake_case)]
-                              unsafe extern "C" fn __export_add(arg0: i32,arg1: i32,) -> i64 {
-                                #[allow(unused_imports)]
-                                use wit_bindgen::rt::{alloc, vec::Vec, string::String};
-                                
-                                // Before executing any other code, use this function to run all static
-                                // constructors, if they have not yet been run. This is a hack required
-                                // to work around wasi-libc ctors calling import functions to initialize
-                                // the environment.
-                                //
-                                // This functionality will be removed once rust 1.69.0 is stable, at which
-                                // point wasi-libc will no longer have this behavior.
-                                //
-                                // See
-                                // https://github.com/bytecodealliance/preview2-prototyping/issues/99
-                                // for more details.
-                                #[cfg(target_arch="wasm32")]
-                                wit_bindgen::rt::run_ctors_once();
-                                
-                                let result0 = <_GuestImpl as Guest>::add(arg0, arg1);
-                                wit_bindgen::rt::as_i64(result0)
+                              unsafe extern "C" fn dtor(rep: usize) {
+                                wit_bindgen::rt::Resource::<Api>::dtor(rep)
                               }
                             };
+                            unsafe impl wit_bindgen::rt::RustResource for Api{
+                              unsafe fn new(_rep: usize) -> u32 {
+                                #[cfg(not(target_arch = "wasm32"))]
+                                unreachable!();
+                                
+                                #[cfg(target_arch = "wasm32")]
+                                {
+                                  #[link(wasm_import_module = "[export]test:caller-stub/stub-caller")]
+                                  extern "C" {
+                                    #[link_name = "[resource-new]api"]
+                                    fn new(_: usize) -> u32;
+                                  }
+                                  new(_rep)
+                                }
+                              }
+                              
+                              unsafe fn rep(_handle: u32) -> usize {
+                                #[cfg(not(target_arch = "wasm32"))]
+                                unreachable!();
+                                
+                                #[cfg(target_arch = "wasm32")]
+                                {
+                                  #[link(wasm_import_module = "[export]test:caller-stub/stub-caller")]
+                                  extern "C" {
+                                    #[link_name = "[resource-rep]api"]
+                                    fn rep(_: u32) -> usize;
+                                  }
+                                  rep(_handle)
+                                }
+                              }
+                            }
+                            pub type OwnApi = wit_bindgen::rt::Resource<Api>;
+                            
+                            
+                            unsafe impl wit_bindgen::rt::WasmResource for Api{
+                              #[inline]
+                              unsafe fn drop(_handle: u32) {
+                                #[cfg(not(target_arch = "wasm32"))]
+                                unreachable!();
+                                
+                                #[cfg(target_arch = "wasm32")]
+                                {
+                                  #[link(wasm_import_module = "[export]test:caller-stub/stub-caller")]
+                                  extern "C" {
+                                    #[link_name = "[resource-drop]api"]
+                                    fn drop(_: u32);
+                                  }
+                                  
+                                  drop(_handle);
+                                }
+                              }
+                            }
+                            
                             const _: () = {
                               
                               #[doc(hidden)]
-                              #[export_name = "test:caller/api#run"]
+                              #[export_name = "test:caller-stub/stub-caller#[constructor]api"]
                               #[allow(non_snake_case)]
-                              unsafe extern "C" fn __export_run(arg0: i32,arg1: i32,) -> i32 {
+                              unsafe extern "C" fn __export_constructor_api(arg0: i32,arg1: i32,) -> i32 {
                                 #[allow(unused_imports)]
                                 use wit_bindgen::rt::{alloc, vec::Vec, string::String};
                                 
@@ -1645,9 +1388,67 @@ pub mod golem {
                                 
                                 let len0 = arg1 as usize;
                                 let bytes0 = Vec::from_raw_parts(arg0 as *mut _, len0, len0);
-                                let result1 = <_GuestImpl as Guest>::run(wit_bindgen::rt::string_lift(bytes0));
+                                let result1 = OwnApi::new(<_ApiImpl as GuestApi>::new(super::super::super::super::golem::rpc::types::Uri{
+                                  value: wit_bindgen::rt::string_lift(bytes0),
+                                }));
+                                wit_bindgen::rt::Resource::into_handle(result1) as i32
+                              }
+                            };
+                            const _: () = {
+                              
+                              #[doc(hidden)]
+                              #[export_name = "test:caller-stub/stub-caller#[method]api.add"]
+                              #[allow(non_snake_case)]
+                              unsafe extern "C" fn __export_method_api_add(arg0: i32,arg1: i32,arg2: i32,) -> i64 {
+                                #[allow(unused_imports)]
+                                use wit_bindgen::rt::{alloc, vec::Vec, string::String};
+                                
+                                // Before executing any other code, use this function to run all static
+                                // constructors, if they have not yet been run. This is a hack required
+                                // to work around wasi-libc ctors calling import functions to initialize
+                                // the environment.
+                                //
+                                // This functionality will be removed once rust 1.69.0 is stable, at which
+                                // point wasi-libc will no longer have this behavior.
+                                //
+                                // See
+                                // https://github.com/bytecodealliance/preview2-prototyping/issues/99
+                                // for more details.
+                                #[cfg(target_arch="wasm32")]
+                                wit_bindgen::rt::run_ctors_once();
+                                
+                                let result0 = <_ApiImpl as GuestApi>::add(wit_bindgen::rt::Resource::<Api>::lift_borrow(arg0 as u32 as usize), arg1, arg2);
+                                wit_bindgen::rt::as_i64(result0)
+                              }
+                            };
+                            const _: () = {
+                              
+                              #[doc(hidden)]
+                              #[export_name = "test:caller-stub/stub-caller#[method]api.run"]
+                              #[allow(non_snake_case)]
+                              unsafe extern "C" fn __export_method_api_run(arg0: i32,arg1: i32,arg2: i32,) -> i32 {
+                                #[allow(unused_imports)]
+                                use wit_bindgen::rt::{alloc, vec::Vec, string::String};
+                                
+                                // Before executing any other code, use this function to run all static
+                                // constructors, if they have not yet been run. This is a hack required
+                                // to work around wasi-libc ctors calling import functions to initialize
+                                // the environment.
+                                //
+                                // This functionality will be removed once rust 1.69.0 is stable, at which
+                                // point wasi-libc will no longer have this behavior.
+                                //
+                                // See
+                                // https://github.com/bytecodealliance/preview2-prototyping/issues/99
+                                // for more details.
+                                #[cfg(target_arch="wasm32")]
+                                wit_bindgen::rt::run_ctors_once();
+                                
+                                let len0 = arg2 as usize;
+                                let bytes0 = Vec::from_raw_parts(arg1 as *mut _, len0, len0);
+                                let result1 = <_ApiImpl as GuestApi>::run(wit_bindgen::rt::Resource::<Api>::lift_borrow(arg0 as u32 as usize), wit_bindgen::rt::string_lift(bytes0));
                                 let ptr2 = _RET_AREA.0.as_mut_ptr() as i32;
-                                let NewType{ value:value3, } = result1;
+                                let super::super::super::super::test::caller::api::NewType{ value:value3, } = result1;
                                 let vec4 = (value3.into_bytes()).into_boxed_slice();
                                 let ptr4 = vec4.as_ptr() as i32;
                                 let len4 = vec4.len() as i32;
@@ -1659,19 +1460,20 @@ pub mod golem {
                               
                               const _: () = {
                                 #[doc(hidden)]
-                                #[export_name = "cabi_post_test:caller/api#run"]
+                                #[export_name = "cabi_post_test:caller-stub/stub-caller#[method]api.run"]
                                 #[allow(non_snake_case)]
-                                unsafe extern "C" fn __post_return_run(arg0: i32,) {
+                                unsafe extern "C" fn __post_return_method_api_run(arg0: i32,) {
                                   let l0 = *((arg0 + 0) as *const i32);
                                   let l1 = *((arg0 + 4) as *const i32);
                                   wit_bindgen::rt::dealloc(l0, (l1) as usize, 1);
                                 }
                               };
                             };
-                            use super::super::super::super::super::Component as _GuestImpl;
-                            pub trait Guest {
-                              fn add(x: i32,y: i32,) -> i64;
-                              fn run(name: wit_bindgen::rt::string::String,) -> NewType;
+                            use super::super::super::super::super::Api as _ApiImpl;
+                            pub trait GuestApi {
+                              fn new(location: Uri,) -> Self;
+                              fn add(&self,x: i32,y: i32,) -> i64;
+                              fn run(&self,name: wit_bindgen::rt::string::String,) -> NewType;
                             }
                             
                             #[allow(unused_imports)]
@@ -1688,9 +1490,9 @@ pub mod golem {
                     }
                     
                     #[cfg(target_arch = "wasm32")]
-                    #[link_section = "component-type:caller"]
+                    #[link_section = "component-type:wasm-rpc-stub-caller"]
                     #[doc(hidden)]
-                    pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 2049] = [3, 0, 6, 99, 97, 108, 108, 101, 114, 0, 97, 115, 109, 13, 0, 1, 0, 7, 130, 2, 1, 65, 2, 1, 66, 21, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 0, 1, 109, 2, 1, 97, 1, 98, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 2, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 3, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 5, 1, 107, 115, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 7, 1, 106, 1, 8, 1, 115, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 9, 1, 106, 0, 1, 115, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 11, 1, 106, 1, 115, 0, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 13, 1, 106, 0, 0, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 15, 1, 64, 2, 1, 120, 122, 1, 121, 122, 0, 120, 4, 0, 3, 97, 100, 100, 1, 17, 1, 64, 1, 4, 110, 97, 109, 101, 115, 0, 1, 4, 0, 3, 114, 117, 110, 1, 18, 4, 1, 15, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 47, 97, 112, 105, 5, 0, 11, 9, 1, 0, 3, 97, 112, 105, 3, 0, 0, 7, 245, 12, 1, 65, 2, 1, 65, 12, 1, 66, 29, 1, 122, 4, 0, 10, 110, 111, 100, 101, 45, 105, 110, 100, 101, 120, 3, 0, 0, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 3, 117, 114, 105, 3, 0, 2, 1, 112, 1, 1, 107, 1, 1, 111, 2, 121, 5, 1, 112, 127, 1, 106, 1, 5, 1, 5, 1, 111, 2, 3, 119, 1, 113, 22, 12, 114, 101, 99, 111, 114, 100, 45, 118, 97, 108, 117, 101, 1, 4, 0, 13, 118, 97, 114, 105, 97, 110, 116, 45, 118, 97, 108, 117, 101, 1, 6, 0, 10, 101, 110, 117, 109, 45, 118, 97, 108, 117, 101, 1, 121, 0, 11, 102, 108, 97, 103, 115, 45, 118, 97, 108, 117, 101, 1, 7, 0, 11, 116, 117, 112, 108, 101, 45, 118, 97, 108, 117, 101, 1, 4, 0, 10, 108, 105, 115, 116, 45, 118, 97, 108, 117, 101, 1, 4, 0, 12, 111, 112, 116, 105, 111, 110, 45, 118, 97, 108, 117, 101, 1, 5, 0, 12, 114, 101, 115, 117, 108, 116, 45, 118, 97, 108, 117, 101, 1, 8, 0, 7, 112, 114, 105, 109, 45, 117, 56, 1, 125, 0, 8, 112, 114, 105, 109, 45, 117, 49, 54, 1, 123, 0, 8, 112, 114, 105, 109, 45, 117, 51, 50, 1, 121, 0, 8, 112, 114, 105, 109, 45, 117, 54, 52, 1, 119, 0, 7, 112, 114, 105, 109, 45, 115, 56, 1, 126, 0, 8, 112, 114, 105, 109, 45, 115, 49, 54, 1, 124, 0, 8, 112, 114, 105, 109, 45, 115, 51, 50, 1, 122, 0, 8, 112, 114, 105, 109, 45, 115, 54, 52, 1, 120, 0, 12, 112, 114, 105, 109, 45, 102, 108, 111, 97, 116, 51, 50, 1, 118, 0, 12, 112, 114, 105, 109, 45, 102, 108, 111, 97, 116, 54, 52, 1, 117, 0, 9, 112, 114, 105, 109, 45, 99, 104, 97, 114, 1, 116, 0, 9, 112, 114, 105, 109, 45, 98, 111, 111, 108, 1, 127, 0, 11, 112, 114, 105, 109, 45, 115, 116, 114, 105, 110, 103, 1, 115, 0, 6, 104, 97, 110, 100, 108, 101, 1, 9, 0, 4, 0, 8, 119, 105, 116, 45, 110, 111, 100, 101, 3, 0, 10, 1, 112, 11, 1, 114, 1, 5, 110, 111, 100, 101, 115, 12, 4, 0, 9, 119, 105, 116, 45, 118, 97, 108, 117, 101, 3, 0, 13, 1, 113, 4, 14, 112, 114, 111, 116, 111, 99, 111, 108, 45, 101, 114, 114, 111, 114, 1, 115, 0, 6, 100, 101, 110, 105, 101, 100, 1, 115, 0, 9, 110, 111, 116, 45, 102, 111, 117, 110, 100, 1, 115, 0, 21, 114, 101, 109, 111, 116, 101, 45, 105, 110, 116, 101, 114, 110, 97, 108, 45, 101, 114, 114, 111, 114, 1, 115, 0, 4, 0, 9, 114, 112, 99, 45, 101, 114, 114, 111, 114, 3, 0, 15, 4, 0, 8, 119, 97, 115, 109, 45, 114, 112, 99, 3, 1, 1, 105, 17, 1, 64, 1, 8, 108, 111, 99, 97, 116, 105, 111, 110, 3, 0, 18, 4, 0, 21, 91, 99, 111, 110, 115, 116, 114, 117, 99, 116, 111, 114, 93, 119, 97, 115, 109, 45, 114, 112, 99, 1, 19, 1, 104, 17, 1, 112, 14, 1, 106, 1, 14, 1, 16, 1, 64, 3, 4, 115, 101, 108, 102, 20, 13, 102, 117, 110, 99, 116, 105, 111, 110, 45, 110, 97, 109, 101, 115, 15, 102, 117, 110, 99, 116, 105, 111, 110, 45, 112, 97, 114, 97, 109, 115, 21, 0, 22, 4, 0, 33, 91, 109, 101, 116, 104, 111, 100, 93, 119, 97, 115, 109, 45, 114, 112, 99, 46, 105, 110, 118, 111, 107, 101, 45, 97, 110, 100, 45, 97, 119, 97, 105, 116, 1, 23, 1, 106, 0, 1, 16, 1, 64, 3, 4, 115, 101, 108, 102, 20, 13, 102, 117, 110, 99, 116, 105, 111, 110, 45, 110, 97, 109, 101, 115, 15, 102, 117, 110, 99, 116, 105, 111, 110, 45, 112, 97, 114, 97, 109, 115, 21, 0, 24, 4, 0, 23, 91, 109, 101, 116, 104, 111, 100, 93, 119, 97, 115, 109, 45, 114, 112, 99, 46, 105, 110, 118, 111, 107, 101, 1, 25, 3, 1, 21, 103, 111, 108, 101, 109, 58, 114, 112, 99, 47, 116, 121, 112, 101, 115, 64, 48, 46, 49, 46, 48, 5, 0, 2, 3, 0, 0, 3, 117, 114, 105, 1, 66, 29, 2, 3, 2, 1, 1, 4, 0, 3, 117, 114, 105, 3, 0, 0, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 2, 1, 109, 2, 1, 97, 1, 98, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 4, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 5, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 7, 1, 107, 115, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 9, 1, 107, 115, 1, 106, 1, 11, 1, 115, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 12, 1, 106, 0, 1, 115, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 14, 1, 106, 1, 115, 0, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 16, 1, 106, 0, 0, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 18, 4, 0, 3, 97, 112, 105, 3, 1, 1, 105, 20, 1, 64, 1, 8, 108, 111, 99, 97, 116, 105, 111, 110, 1, 0, 21, 4, 0, 16, 91, 99, 111, 110, 115, 116, 114, 117, 99, 116, 111, 114, 93, 97, 112, 105, 1, 22, 1, 104, 20, 1, 64, 3, 4, 115, 101, 108, 102, 23, 1, 120, 122, 1, 121, 122, 0, 120, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 97, 100, 100, 1, 24, 1, 64, 2, 4, 115, 101, 108, 102, 23, 4, 110, 97, 109, 101, 115, 0, 3, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 114, 117, 110, 1, 25, 3, 1, 28, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 45, 115, 116, 117, 98, 47, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 5, 2, 1, 66, 4, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 11, 99, 97, 108, 108, 101, 101, 45, 116, 121, 112, 101, 3, 0, 0, 1, 64, 1, 4, 110, 97, 109, 101, 115, 0, 1, 4, 0, 3, 114, 117, 110, 1, 2, 3, 1, 15, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 101, 47, 97, 112, 105, 5, 3, 2, 3, 0, 2, 11, 99, 97, 108, 108, 101, 101, 45, 116, 121, 112, 101, 1, 66, 11, 2, 3, 2, 1, 1, 4, 0, 3, 117, 114, 105, 3, 0, 0, 2, 3, 2, 1, 4, 4, 0, 11, 99, 97, 108, 108, 101, 101, 45, 116, 121, 112, 101, 3, 0, 2, 4, 0, 3, 97, 112, 105, 3, 1, 1, 105, 4, 1, 64, 1, 8, 108, 111, 99, 97, 116, 105, 111, 110, 1, 0, 5, 4, 0, 16, 91, 99, 111, 110, 115, 116, 114, 117, 99, 116, 111, 114, 93, 97, 112, 105, 1, 6, 1, 104, 4, 1, 64, 2, 4, 115, 101, 108, 102, 7, 4, 110, 97, 109, 101, 115, 0, 3, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 114, 117, 110, 1, 8, 3, 1, 28, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 101, 45, 115, 116, 117, 98, 47, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 101, 5, 5, 1, 66, 21, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 0, 1, 109, 2, 1, 97, 1, 98, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 2, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 3, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 5, 1, 107, 115, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 7, 1, 106, 1, 8, 1, 115, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 9, 1, 106, 0, 1, 115, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 11, 1, 106, 1, 115, 0, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 13, 1, 106, 0, 0, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 15, 1, 64, 2, 1, 120, 122, 1, 121, 122, 0, 120, 4, 0, 3, 97, 100, 100, 1, 17, 1, 64, 1, 4, 110, 97, 109, 101, 115, 0, 1, 4, 0, 3, 114, 117, 110, 1, 18, 4, 1, 15, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 47, 97, 112, 105, 5, 6, 4, 1, 18, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 47, 99, 97, 108, 108, 101, 114, 4, 0, 11, 12, 1, 0, 6, 99, 97, 108, 108, 101, 114, 3, 2, 0, 0, 16, 12, 112, 97, 99, 107, 97, 103, 101, 45, 100, 111, 99, 115, 0, 123, 125, 0, 70, 9, 112, 114, 111, 100, 117, 99, 101, 114, 115, 1, 12, 112, 114, 111, 99, 101, 115, 115, 101, 100, 45, 98, 121, 2, 13, 119, 105, 116, 45, 99, 111, 109, 112, 111, 110, 101, 110, 116, 6, 48, 46, 49, 56, 46, 50, 16, 119, 105, 116, 45, 98, 105, 110, 100, 103, 101, 110, 45, 114, 117, 115, 116, 6, 48, 46, 49, 54, 46, 48];
+                    pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 2988] = [3, 0, 20, 119, 97, 115, 109, 45, 114, 112, 99, 45, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 0, 97, 115, 109, 13, 0, 1, 0, 7, 235, 9, 1, 65, 16, 1, 66, 18, 1, 122, 4, 0, 10, 110, 111, 100, 101, 45, 105, 110, 100, 101, 120, 3, 0, 0, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 3, 117, 114, 105, 3, 0, 2, 1, 112, 1, 1, 107, 1, 1, 111, 2, 121, 5, 1, 112, 127, 1, 106, 1, 5, 1, 5, 1, 111, 2, 3, 119, 1, 113, 22, 12, 114, 101, 99, 111, 114, 100, 45, 118, 97, 108, 117, 101, 1, 4, 0, 13, 118, 97, 114, 105, 97, 110, 116, 45, 118, 97, 108, 117, 101, 1, 6, 0, 10, 101, 110, 117, 109, 45, 118, 97, 108, 117, 101, 1, 121, 0, 11, 102, 108, 97, 103, 115, 45, 118, 97, 108, 117, 101, 1, 7, 0, 11, 116, 117, 112, 108, 101, 45, 118, 97, 108, 117, 101, 1, 4, 0, 10, 108, 105, 115, 116, 45, 118, 97, 108, 117, 101, 1, 4, 0, 12, 111, 112, 116, 105, 111, 110, 45, 118, 97, 108, 117, 101, 1, 5, 0, 12, 114, 101, 115, 117, 108, 116, 45, 118, 97, 108, 117, 101, 1, 8, 0, 7, 112, 114, 105, 109, 45, 117, 56, 1, 125, 0, 8, 112, 114, 105, 109, 45, 117, 49, 54, 1, 123, 0, 8, 112, 114, 105, 109, 45, 117, 51, 50, 1, 121, 0, 8, 112, 114, 105, 109, 45, 117, 54, 52, 1, 119, 0, 7, 112, 114, 105, 109, 45, 115, 56, 1, 126, 0, 8, 112, 114, 105, 109, 45, 115, 49, 54, 1, 124, 0, 8, 112, 114, 105, 109, 45, 115, 51, 50, 1, 122, 0, 8, 112, 114, 105, 109, 45, 115, 54, 52, 1, 120, 0, 12, 112, 114, 105, 109, 45, 102, 108, 111, 97, 116, 51, 50, 1, 118, 0, 12, 112, 114, 105, 109, 45, 102, 108, 111, 97, 116, 54, 52, 1, 117, 0, 9, 112, 114, 105, 109, 45, 99, 104, 97, 114, 1, 116, 0, 9, 112, 114, 105, 109, 45, 98, 111, 111, 108, 1, 127, 0, 11, 112, 114, 105, 109, 45, 115, 116, 114, 105, 110, 103, 1, 115, 0, 6, 104, 97, 110, 100, 108, 101, 1, 9, 0, 4, 0, 8, 119, 105, 116, 45, 110, 111, 100, 101, 3, 0, 10, 1, 112, 11, 1, 114, 1, 5, 110, 111, 100, 101, 115, 12, 4, 0, 9, 119, 105, 116, 45, 118, 97, 108, 117, 101, 3, 0, 13, 1, 113, 4, 14, 112, 114, 111, 116, 111, 99, 111, 108, 45, 101, 114, 114, 111, 114, 1, 115, 0, 6, 100, 101, 110, 105, 101, 100, 1, 115, 0, 9, 110, 111, 116, 45, 102, 111, 117, 110, 100, 1, 115, 0, 21, 114, 101, 109, 111, 116, 101, 45, 105, 110, 116, 101, 114, 110, 97, 108, 45, 101, 114, 114, 111, 114, 1, 115, 0, 4, 0, 9, 114, 112, 99, 45, 101, 114, 114, 111, 114, 3, 0, 15, 4, 0, 8, 119, 97, 115, 109, 45, 114, 112, 99, 3, 1, 3, 1, 21, 103, 111, 108, 101, 109, 58, 114, 112, 99, 47, 116, 121, 112, 101, 115, 64, 48, 46, 49, 46, 48, 5, 0, 1, 66, 17, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 0, 1, 109, 2, 1, 97, 1, 98, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 2, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 3, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 5, 1, 107, 115, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 7, 1, 106, 1, 8, 1, 115, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 9, 1, 106, 0, 1, 115, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 11, 1, 106, 1, 115, 0, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 13, 1, 106, 0, 0, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 15, 3, 1, 15, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 47, 97, 112, 105, 5, 1, 2, 3, 0, 0, 3, 117, 114, 105, 2, 3, 0, 1, 8, 110, 101, 119, 45, 116, 121, 112, 101, 2, 3, 0, 1, 6, 97, 45, 111, 114, 45, 98, 2, 3, 0, 1, 5, 97, 108, 105, 97, 115, 2, 3, 0, 1, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 2, 3, 0, 1, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 2, 3, 0, 1, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 2, 3, 0, 1, 7, 102, 97, 105, 108, 105, 110, 103, 2, 3, 0, 1, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 2, 3, 0, 1, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 1, 66, 29, 2, 3, 2, 1, 2, 4, 0, 3, 117, 114, 105, 3, 0, 0, 2, 3, 2, 1, 3, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 2, 2, 3, 2, 1, 4, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 4, 2, 3, 2, 1, 5, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 6, 2, 3, 2, 1, 6, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 8, 2, 3, 2, 1, 7, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 10, 2, 3, 2, 1, 8, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 12, 2, 3, 2, 1, 9, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 14, 2, 3, 2, 1, 10, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 16, 2, 3, 2, 1, 11, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 18, 4, 0, 3, 97, 112, 105, 3, 1, 1, 105, 20, 1, 64, 1, 8, 108, 111, 99, 97, 116, 105, 111, 110, 1, 0, 21, 4, 0, 16, 91, 99, 111, 110, 115, 116, 114, 117, 99, 116, 111, 114, 93, 97, 112, 105, 1, 22, 1, 104, 20, 1, 64, 3, 4, 115, 101, 108, 102, 23, 1, 120, 122, 1, 121, 122, 0, 120, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 97, 100, 100, 1, 24, 1, 64, 2, 4, 115, 101, 108, 102, 23, 4, 110, 97, 109, 101, 115, 0, 3, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 114, 117, 110, 1, 25, 4, 1, 28, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 45, 115, 116, 117, 98, 47, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 5, 12, 11, 17, 1, 0, 11, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 3, 0, 0, 7, 147, 12, 1, 65, 2, 1, 65, 16, 1, 66, 29, 1, 122, 4, 0, 10, 110, 111, 100, 101, 45, 105, 110, 100, 101, 120, 3, 0, 0, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 3, 117, 114, 105, 3, 0, 2, 1, 112, 1, 1, 107, 1, 1, 111, 2, 121, 5, 1, 112, 127, 1, 106, 1, 5, 1, 5, 1, 111, 2, 3, 119, 1, 113, 22, 12, 114, 101, 99, 111, 114, 100, 45, 118, 97, 108, 117, 101, 1, 4, 0, 13, 118, 97, 114, 105, 97, 110, 116, 45, 118, 97, 108, 117, 101, 1, 6, 0, 10, 101, 110, 117, 109, 45, 118, 97, 108, 117, 101, 1, 121, 0, 11, 102, 108, 97, 103, 115, 45, 118, 97, 108, 117, 101, 1, 7, 0, 11, 116, 117, 112, 108, 101, 45, 118, 97, 108, 117, 101, 1, 4, 0, 10, 108, 105, 115, 116, 45, 118, 97, 108, 117, 101, 1, 4, 0, 12, 111, 112, 116, 105, 111, 110, 45, 118, 97, 108, 117, 101, 1, 5, 0, 12, 114, 101, 115, 117, 108, 116, 45, 118, 97, 108, 117, 101, 1, 8, 0, 7, 112, 114, 105, 109, 45, 117, 56, 1, 125, 0, 8, 112, 114, 105, 109, 45, 117, 49, 54, 1, 123, 0, 8, 112, 114, 105, 109, 45, 117, 51, 50, 1, 121, 0, 8, 112, 114, 105, 109, 45, 117, 54, 52, 1, 119, 0, 7, 112, 114, 105, 109, 45, 115, 56, 1, 126, 0, 8, 112, 114, 105, 109, 45, 115, 49, 54, 1, 124, 0, 8, 112, 114, 105, 109, 45, 115, 51, 50, 1, 122, 0, 8, 112, 114, 105, 109, 45, 115, 54, 52, 1, 120, 0, 12, 112, 114, 105, 109, 45, 102, 108, 111, 97, 116, 51, 50, 1, 118, 0, 12, 112, 114, 105, 109, 45, 102, 108, 111, 97, 116, 54, 52, 1, 117, 0, 9, 112, 114, 105, 109, 45, 99, 104, 97, 114, 1, 116, 0, 9, 112, 114, 105, 109, 45, 98, 111, 111, 108, 1, 127, 0, 11, 112, 114, 105, 109, 45, 115, 116, 114, 105, 110, 103, 1, 115, 0, 6, 104, 97, 110, 100, 108, 101, 1, 9, 0, 4, 0, 8, 119, 105, 116, 45, 110, 111, 100, 101, 3, 0, 10, 1, 112, 11, 1, 114, 1, 5, 110, 111, 100, 101, 115, 12, 4, 0, 9, 119, 105, 116, 45, 118, 97, 108, 117, 101, 3, 0, 13, 1, 113, 4, 14, 112, 114, 111, 116, 111, 99, 111, 108, 45, 101, 114, 114, 111, 114, 1, 115, 0, 6, 100, 101, 110, 105, 101, 100, 1, 115, 0, 9, 110, 111, 116, 45, 102, 111, 117, 110, 100, 1, 115, 0, 21, 114, 101, 109, 111, 116, 101, 45, 105, 110, 116, 101, 114, 110, 97, 108, 45, 101, 114, 114, 111, 114, 1, 115, 0, 4, 0, 9, 114, 112, 99, 45, 101, 114, 114, 111, 114, 3, 0, 15, 4, 0, 8, 119, 97, 115, 109, 45, 114, 112, 99, 3, 1, 1, 105, 17, 1, 64, 1, 8, 108, 111, 99, 97, 116, 105, 111, 110, 3, 0, 18, 4, 0, 21, 91, 99, 111, 110, 115, 116, 114, 117, 99, 116, 111, 114, 93, 119, 97, 115, 109, 45, 114, 112, 99, 1, 19, 1, 104, 17, 1, 112, 14, 1, 106, 1, 14, 1, 16, 1, 64, 3, 4, 115, 101, 108, 102, 20, 13, 102, 117, 110, 99, 116, 105, 111, 110, 45, 110, 97, 109, 101, 115, 15, 102, 117, 110, 99, 116, 105, 111, 110, 45, 112, 97, 114, 97, 109, 115, 21, 0, 22, 4, 0, 33, 91, 109, 101, 116, 104, 111, 100, 93, 119, 97, 115, 109, 45, 114, 112, 99, 46, 105, 110, 118, 111, 107, 101, 45, 97, 110, 100, 45, 97, 119, 97, 105, 116, 1, 23, 1, 106, 0, 1, 16, 1, 64, 3, 4, 115, 101, 108, 102, 20, 13, 102, 117, 110, 99, 116, 105, 111, 110, 45, 110, 97, 109, 101, 115, 15, 102, 117, 110, 99, 116, 105, 111, 110, 45, 112, 97, 114, 97, 109, 115, 21, 0, 24, 4, 0, 23, 91, 109, 101, 116, 104, 111, 100, 93, 119, 97, 115, 109, 45, 114, 112, 99, 46, 105, 110, 118, 111, 107, 101, 1, 25, 3, 1, 21, 103, 111, 108, 101, 109, 58, 114, 112, 99, 47, 116, 121, 112, 101, 115, 64, 48, 46, 49, 46, 48, 5, 0, 1, 66, 21, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 0, 1, 109, 2, 1, 97, 1, 98, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 2, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 3, 1, 114, 1, 5, 118, 97, 108, 117, 101, 115, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 5, 1, 107, 115, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 7, 1, 106, 1, 8, 1, 115, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 9, 1, 106, 0, 1, 115, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 11, 1, 106, 1, 115, 0, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 13, 1, 106, 0, 0, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 15, 1, 64, 2, 1, 120, 122, 1, 121, 122, 0, 120, 4, 0, 3, 97, 100, 100, 1, 17, 1, 64, 1, 4, 110, 97, 109, 101, 115, 0, 1, 4, 0, 3, 114, 117, 110, 1, 18, 3, 1, 15, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 47, 97, 112, 105, 5, 1, 2, 3, 0, 0, 3, 117, 114, 105, 2, 3, 0, 1, 8, 110, 101, 119, 45, 116, 121, 112, 101, 2, 3, 0, 1, 6, 97, 45, 111, 114, 45, 98, 2, 3, 0, 1, 5, 97, 108, 105, 97, 115, 2, 3, 0, 1, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 2, 3, 0, 1, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 2, 3, 0, 1, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 2, 3, 0, 1, 7, 102, 97, 105, 108, 105, 110, 103, 2, 3, 0, 1, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 2, 3, 0, 1, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 1, 66, 29, 2, 3, 2, 1, 2, 4, 0, 3, 117, 114, 105, 3, 0, 0, 2, 3, 2, 1, 3, 4, 0, 8, 110, 101, 119, 45, 116, 121, 112, 101, 3, 0, 2, 2, 3, 2, 1, 4, 4, 0, 6, 97, 45, 111, 114, 45, 98, 3, 0, 4, 2, 3, 2, 1, 5, 4, 0, 5, 97, 108, 105, 97, 115, 3, 0, 6, 2, 3, 2, 1, 6, 4, 0, 12, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 3, 0, 8, 2, 3, 2, 1, 7, 4, 0, 14, 110, 101, 119, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 10, 2, 3, 2, 1, 8, 4, 0, 18, 97, 110, 111, 116, 104, 101, 114, 45, 116, 121, 112, 101, 45, 97, 108, 105, 97, 115, 3, 0, 12, 2, 3, 2, 1, 9, 4, 0, 7, 102, 97, 105, 108, 105, 110, 103, 3, 0, 14, 2, 3, 2, 1, 10, 4, 0, 11, 110, 111, 116, 45, 102, 97, 105, 108, 105, 110, 103, 3, 0, 16, 2, 3, 2, 1, 11, 4, 0, 9, 110, 111, 45, 114, 101, 115, 117, 108, 116, 3, 0, 18, 4, 0, 3, 97, 112, 105, 3, 1, 1, 105, 20, 1, 64, 1, 8, 108, 111, 99, 97, 116, 105, 111, 110, 1, 0, 21, 4, 0, 16, 91, 99, 111, 110, 115, 116, 114, 117, 99, 116, 111, 114, 93, 97, 112, 105, 1, 22, 1, 104, 20, 1, 64, 3, 4, 115, 101, 108, 102, 23, 1, 120, 122, 1, 121, 122, 0, 120, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 97, 100, 100, 1, 24, 1, 64, 2, 4, 115, 101, 108, 102, 23, 4, 110, 97, 109, 101, 115, 0, 3, 4, 0, 15, 91, 109, 101, 116, 104, 111, 100, 93, 97, 112, 105, 46, 114, 117, 110, 1, 25, 4, 1, 28, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 45, 115, 116, 117, 98, 47, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 5, 12, 4, 1, 37, 116, 101, 115, 116, 58, 99, 97, 108, 108, 101, 114, 45, 115, 116, 117, 98, 47, 119, 97, 115, 109, 45, 114, 112, 99, 45, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 4, 0, 11, 26, 1, 0, 20, 119, 97, 115, 109, 45, 114, 112, 99, 45, 115, 116, 117, 98, 45, 99, 97, 108, 108, 101, 114, 3, 2, 0, 0, 16, 12, 112, 97, 99, 107, 97, 103, 101, 45, 100, 111, 99, 115, 0, 123, 125, 0, 70, 9, 112, 114, 111, 100, 117, 99, 101, 114, 115, 1, 12, 112, 114, 111, 99, 101, 115, 115, 101, 100, 45, 98, 121, 2, 13, 119, 105, 116, 45, 99, 111, 109, 112, 111, 110, 101, 110, 116, 6, 48, 46, 49, 56, 46, 50, 16, 119, 105, 116, 45, 98, 105, 110, 100, 103, 101, 110, 45, 114, 117, 115, 116, 6, 48, 46, 49, 54, 46, 48];
                     
                     #[inline(never)]
                     #[doc(hidden)]
